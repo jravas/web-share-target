@@ -5,10 +5,11 @@ const urlsToCache = [
   "./images/logo192.png",
 ];
 
-const broadcast = new BroadcastChannel("sw-channel");
+// const broadcast = new BroadcastChannel("sw-channel");
 
 self.addEventListener("install", (event) => {
   // Perform install steps
+
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Opened cache", cache);
@@ -23,7 +24,12 @@ self.addEventListener("fetch", function (event) {
       (async () => {
         const formData = await event.request.formData();
         const link = formData.get("file") || "";
-        broadcast.postMessage({ payload: link });
+        self.clients.matchAll().then(function (clients) {
+          clients.forEach(function (client) {
+            console.log(client);
+            client.postMessage(link);
+          });
+        });
         return await fetch("index.html");
       })()
     );

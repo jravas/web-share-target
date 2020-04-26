@@ -16,16 +16,16 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+navigator.serviceWorker.addEventListener("message", function (message) {
+  const messageTarget = document.getElementById("share-target");
+  messageTarget.innerHTML = "updating";
+  messageTarget.innerHTML = JSON.stringify(message);
+});
+
 const broadcast = new BroadcastChannel("sw-channel");
-let message;
 
 function showData() {
   const messageTarget = document.getElementById("share-target");
-  messageTarget.innerHTML = "updating";
-  messageTarget.innerHTML = message;
 }
 
 // Listen to the response
-broadcast.onmessage = (event) => {
-  message = JSON.stringify(event.data.payload);
-};
