@@ -17,9 +17,15 @@ if ("serviceWorker" in navigator) {
 }
 
 const broadcast = new BroadcastChannel("sw-channel");
-const message = document.getElementById("share-target");
+let message;
+
+const showData = () => {
+  const messageTarget = document.getElementById("share-target");
+  messageTarget.innerHTML = "updating";
+  messageTarget.innerHTML = message;
+};
 
 // Listen to the response
 broadcast.onmessage = (event) => {
-  message.innerHTML = JSON.stringify(event.data.payload);
+  message = JSON.stringify(event.data.payload);
 };
