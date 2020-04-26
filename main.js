@@ -19,11 +19,11 @@ if ("serviceWorker" in navigator) {
 const broadcast = new BroadcastChannel("sw-channel");
 let message;
 
-const showData = () => {
+function showData() {
   const messageTarget = document.getElementById("share-target");
   messageTarget.innerHTML = "updating";
   messageTarget.innerHTML = message;
-};
+}
 
 // Listen to the response
 broadcast.onmessage = (event) => {
