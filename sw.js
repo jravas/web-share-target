@@ -24,12 +24,7 @@ self.addEventListener("fetch", function (event) {
       (async () => {
         const formData = await event.request.formData();
         const link = formData.get("file") || "";
-        self.clients.matchAll().then(function (clients) {
-          clients.forEach(function async(client) {
-            console.log(client);
-            return new Response("Bookmark saved: " + link);
-          });
-        });
+        return new Response("Bookmark saved: " + link);
       })()
     );
   }
