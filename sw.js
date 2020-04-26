@@ -23,7 +23,7 @@ self.addEventListener("fetch", function (event) {
       (async () => {
         const formData = await event.request.formData();
         const link = formData.get("file") || "";
-        broadcast.postMessage({ payload: link });
+        return await fetch("index.html");
       })()
     );
   }
