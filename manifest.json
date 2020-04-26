@@ -14,6 +14,7 @@
       "sizes": "512x512"
     }
   ],
+  "scope": "https://jravas.github.io/web-share-target/",
   "start_url": "./index.html",
   "background_color": "#3367D6",
   "display": "standalone",
