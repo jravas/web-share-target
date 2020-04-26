@@ -28,9 +28,10 @@ self.addEventListener("fetch", function (event) {
           clients.forEach(function (client) {
             console.log(client);
             client.postMessage(link);
+            return await fetch("index.html");
           });
         });
-        return await fetch("index.html");
+        
       })()
     );
   }
