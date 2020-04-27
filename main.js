@@ -16,11 +16,19 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-navigator.serviceWorker.addEventListener("message", function (message) {
-  const messageTarget = document.getElementById("share-target");
-  messageTarget.innerHTML = "updating";
-  messageTarget.innerHTML = JSON.stringify(message);
-});
+// navigator.serviceWorker.addEventListener("message", function (message) {
+//   const messageTarget = document.getElementById("share-target");
+//   messageTarget.innerHTML = "updating";
+//   messageTarget.innerHTML = JSON.stringify(message);
+// });
+
+navigator.serviceWorker.onmessage = (event) => {
+  const imageShare = document.getElementById("share-target");
+
+  const imageBlob = event.data.file;
+  // Update the UI with the data that has been shared to it.
+  imageShare.src = URL.createObjectURL(imageBlob);
+};
 
 const broadcast = new BroadcastChannel("sw-channel");
 
